@@ -1,18 +1,8 @@
 {
   "todos": [
     {
-      "id": "td3",
+      "id": "d3",
       "title": "title",
-      "completed": false
-    },
-    {
-      "id": "4019607a-5b77-4d4b-994c-d8ce1e6cf6f4",
-      "title": "next js 공부하기",
-      "completed": false
-    },
-    {
-      "id": "dc60b747-7be5-436f-b276-eea4b7489c99",
-      "title": "취업하기",
       "completed": false
     }
   ]

@@ -39,34 +39,48 @@ function App() {
     setTitle(""); // input 초기화
   };
 
+  // todo를 삭제하는 함수
+  const handleDeleteTodo = async (id: Todo["id"]) => {
+    // 서버 데이터 삭제
+    await fetch(`http://localhost:4000/todos/${id}`, {
+      method: "DELETE",
+    });
+
+    // todoList 상태 업데이트
+    setTodoList((prev) => prev.filter((item) => item.id !== id));
+  };
+
   return (
     <>
-      <TodoList todoList={todoList} />
+      <TodoList todoList={todoList} onDeleteClick={handleDeleteTodo} />
       <input type="text" value={title} onChange={(e) => handleTitleChange(e)} />
       <button onClick={handleAddTodo}>등록하기</button>
     </>
   );
 }
 
-type TodoListProps = { todoList: Todo[] };
-function TodoList({ todoList }: TodoListProps) {
+type TodoListProps = {
+  todoList: Todo[];
+  onDeleteClick: (id: Todo["id"]) => void;
+};
+function TodoList({ todoList, onDeleteClick }: TodoListProps) {
   return (
     <>
       {todoList.map((item) => (
-        <TodoItem key={item.id} {...item} />
+        <TodoItem key={item.id} {...item} onDeleteClick={onDeleteClick} />
       ))}
     </>
   );
 }
 
-type TodoItemProps = Todo;
-function TodoItem({ id, title, completed }: TodoItemProps) {
+type TodoItemProps = Todo & { onDeleteClick: (id: Todo["id"]) => void };
+function TodoItem({ id, title, completed, onDeleteClick }: TodoItemProps) {
   return (
     <div>
       <div>id: {id}.</div>
       <div>title: {title}</div>
       <div>completed: {`${completed}`}</div>
-      <button>삭제</button> <br />
+      <button onClick={() => onDeleteClick(id)}>삭제</button> <br />
       ----------------------
     </div>
   );
