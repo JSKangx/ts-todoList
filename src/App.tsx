@@ -1,8 +1,13 @@
+import { useEffect, useState } from "react";
 import "./App.css";
-import { type Todo } from "./test";
+import { getTodos, type Todo } from "./test";
 
 function App() {
-  return <TodoList todoList={[]} />;
+  const [todoList, setTodoList] = useState<Todo[]>([]);
+  useEffect(() => {
+    getTodos().then((data) => setTodoList(data));
+  }, []);
+  return <TodoList todoList={todoList} />;
 }
 
 type TodoListProps = { todoList: Todo[] };
@@ -20,9 +25,9 @@ type TodoItemProps = Todo;
 function TodoItem({ id, title, completed }: TodoItemProps) {
   return (
     <div>
-      <div>{id}</div>
-      <div>{title}</div>
-      <div>{completed}</div>
+      <div>id: {id}.</div>
+      <div>title: {title}</div>
+      <div>completed: {`${completed}`}</div>
     </div>
   );
 }
