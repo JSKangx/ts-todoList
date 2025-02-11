@@ -10,3 +10,5 @@ export async function getTodos(): Promise<Todo[]> {
 
   return data;
 }
+
+export async function createTodo() {}
