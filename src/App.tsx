@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import { getTodos, type Todo } from "./test";
+import "./App.css";
 
 type ToggleTodo = Omit<Todo, "title">;
 
@@ -10,7 +10,7 @@ function App() {
 
   // 컴포넌트 마운트 이후 todoList fetching
   useEffect(() => {
-    getTodos().then((data) => setTodoList(data));
+    getTodos().then((data) => setTodoList(data.data));
   }, []);
 
   // todo의 title을 handling 하는 함수
